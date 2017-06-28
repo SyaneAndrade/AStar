@@ -28,30 +28,34 @@ public class AStar {
      */
     public boolean jaExpandido(Node node){
         for(Node fechado: this.fechados){
-            if(node.estado != fechado.estado) {
-            } 
-            else {
+            if(fechado.estado.equals(node.estado)) {
                 return true;
-            }
+            } 
         }
         return false;
     }
     
     public void ProximoNoAProcessar(){
-        this.processado.estado = this.abertos.get(0).estado.clone();
-        this.processado.f = this.abertos.get(0).f;
-        this.processado.g = this.abertos.get(0).g;
-        this.processado.h1 = this.abertos.get(0).h1;
-        this.processado.h2 = this.abertos.get(0).h2;
+        this.processado=(Node) this.abertos.get(0).Clone();
         for(Node aberto: this.abertos){
             if(this.processado.f > aberto.f){
-                this.processado.estado = aberto.estado.clone();
-                this.processado.f = aberto.f;
-                this.processado.g = aberto.g;
-                this.processado.h1 = aberto.h1;
-                this.processado.h2 = aberto.h2;
+                this.processado = (Node)aberto.Clone();
             }
         }
+    }
+    
+    public boolean verifyMatriz(int[][]adj, int[][] aberta){
+        for(int lin=0; lin <3; lin++){
+            for(int col=0; col <3; col++){
+                if(adj[lin][col] == aberta[lin][col]){
+                    
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
     /**
@@ -62,19 +66,20 @@ public class AStar {
      * o nó existente na lista será atualizado, se não ele mantém os valores originais
      * e descarta o no_adj
      */
-    public boolean inAbertos(Node node){
+    public boolean inAbertos(Node node_adj){
         for(Node aberto: this.abertos){
-            if(node.estado != aberto.estado) {
+            if(node_adj.estado.equals(aberto.estado)) {
+                if(aberto.g > node_adj.g){
+                    aberto.g = node_adj.g;
+                    aberto.f = node_adj.f;
+                    aberto.h1 = node_adj.h1;
+                    aberto.h2 = node_adj.h2;
+                    aberto.pai = (Node)node_adj.pai.Clone();
+                }
+                return true;
             } 
             else {
-                if(aberto.g > node.g){
-                    aberto.g = node.g;
-                    aberto.f = node.f;
-                    aberto.h1 = node.h1;
-                    aberto.h2 = node.h2;
-                    aberto.pai = (Node)node.pai.Clone();
-                    return true;
-                }
+                return false;
             }
         }
         return false;

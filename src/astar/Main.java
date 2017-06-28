@@ -21,24 +21,25 @@ public class Main {
         quebraCabecadosOitos quebrac = new quebraCabecadosOitos();
 
         astar.raiz.estado = quebrac.estadoInicial.clone();
-        
-        /*if(raiz.estado != null)
-            System.out.println(raiz.estado[1][2]);*/
 
-        astar.processado.estado = astar.raiz.estado.clone();
+        astar.processado = (Node)astar.raiz.Clone();
 
-        boolean h1 = true;
+        boolean h1 = false;
 
         //Adciona a raiz a lista de nos abertos
-        astar.abertos.add(astar.raiz);
+        astar.abertos.add(astar.processado);
         //Enquanto ter elementos na lista
-        while(0 != astar.abertos.size()){
+        while(astar.abertos.size() != 0){
             //remove o elemento a ser o proximo processado
-            astar.abertos.remove(astar.processado);
+            //astar.abertos.remove(astar.processado);
+             RemoveDaLista(astar.abertos, astar.processado);
+            astar.processado.printEstado();
+            System.out.println();
             //adciona ao de elementos fechados, pois esta sendo atendido
             astar.fechados.add(astar.processado);
             //Verifica se o nó possui o estado objetivo
             if(astar.estadoFinal(astar.processado)){
+                astar.processado.printEstado();
                 //Calcula o caminho do estado o objetivo utilizando os pais
                 quebrac.Caminho = astar.CaminhoCompleto(astar.processado);
                 break;
@@ -82,4 +83,16 @@ public class Main {
             astar.ProximoNoAProcessar();
         }
     }
+    
+    public static void RemoveDaLista(List<Node> abertos, Node node){
+        int index = 0;
+        for(Node aberto: abertos){
+            if(aberto.estado.equals(node.estado)){
+                index = abertos.indexOf(aberto);
+                break;
+            }
+        }
+        abertos.remove(index);
+    }
+    
 }

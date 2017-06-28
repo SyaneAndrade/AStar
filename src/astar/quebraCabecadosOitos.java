@@ -38,11 +38,9 @@ public class quebraCabecadosOitos  {
         for (lin = 0; lin < 3; lin++){
             for(col =0; col < 3; col++){
                 if(node.estado[lin][col] == 0){
-                    System.out.println("Achei o 0 " + node.estado[lin][col]);
                     break;
                 }
             }
-            System.out.println(lin +" "+ col);
             if(col < 3 && node.estado[lin][col] == 0)
                 break;
         }
@@ -85,15 +83,15 @@ public class quebraCabecadosOitos  {
                  adjacente.estado = possivelEstado.clone();
                  adjacente.pai = (Node)node.Clone();
                  adjacente.printEstado();
-                 System.out.println("Pai");
-                 adjacente.pai.printEstado();
+                 /*System.out.println("Pai");
+                 adjacente.pai.printEstado();*/
                  System.out.println();
                  adjacentes.add(adjacente);
                  
                  
             }
             catch(Exception e){
-                System.out.println(e.getMessage());
+                //System.out.println(e.getMessage());
                 //Ignora se ocorrer alguma exception, devido a espaço inexistente
                 continue;
             }finally{
@@ -130,8 +128,26 @@ public class quebraCabecadosOitos  {
      * O numero de blocos em posição errada
      */
     public int HeuristicaTotaldePecaForadoLugar(Node node){
-        return 8;
-    }
+        int heuristica = 0;
+        if(node.estado[0][0] != 0)
+          heuristica += 1;
+        if(node.estado[0][1] != 1)
+          heuristica += 1;
+        if(node.estado[0][2] != 2)
+          heuristica += 1;
+        if(node.estado[1][0] != 3)
+          heuristica += 1;
+        if(node.estado[1][1] != 4)
+          heuristica += 1;
+        if(node.estado[1][2] != 5)
+          heuristica += 1;
+        if(node.estado[2][0] != 6)
+          heuristica += 1;
+        if(node.estado[2][1] != 7)
+          heuristica += 1;
+        if(node.estado[2][2] != 8)
+          heuristica += 1;
 
-    
-}
+        return heuristica;
+      }
+    }

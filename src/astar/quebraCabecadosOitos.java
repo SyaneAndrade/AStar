@@ -79,7 +79,10 @@ public class quebraCabecadosOitos  {
                 }
                  Node adjacente = new Node();
                  adjacente.estado = possivelEstado.clone();
-                 adjacente.pai = node;
+                 adjacente.pai = (Node) node.Clone();
+                 adjacentes.add(adjacente);
+                 
+                 
             }
             catch(Exception e){
                 System.out.println(e.getMessage());

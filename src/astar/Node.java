@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author syane
  */
-public class Node {
+public class Node implements Cloneable {
     int f;
     int g;
     int h1;
@@ -20,10 +20,18 @@ public class Node {
     Node pai;
     int[][] estado;
     
-    public List<Node> calculaAdjacentes(quebraCabecadosOitos quebrac){
-        List<Node> adjacentes = new ArrayList<>();
+    public Object Clone(){
+        try{
+            return (Node)super.clone();
+        }
+        catch(CloneNotSupportedException e){
+            System.out.println("Cloning not allowed.");
+            return this;
+        }
+    }
+    
+    public void calculaAdjacentes(quebraCabecadosOitos quebrac, List<Node> adjacentes){
         quebrac.verificaProximosEstado(adjacentes, this);
-        return adjacentes;
     }
     
     /**

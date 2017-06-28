@@ -5,6 +5,7 @@
  */
 package astar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,7 +44,8 @@ public class Main {
                 break;
             }
             //Calcula todos os nós adjacentes ao nó em processamento
-            List<Node> adjacentes = astar.processado.calculaAdjacentes(quebrac);
+            List<Node> adjacentes = new ArrayList<>();
+            astar.processado.calculaAdjacentes(quebrac, adjacentes);
             //Atualiza todos os valores do Node(F, G, H)
             //A variavel H1 decide qual heuristica irá usar para o calculo da F
             astar.AtualizaAdjacentes(adjacentes, quebrac);

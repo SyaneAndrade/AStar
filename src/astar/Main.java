@@ -30,26 +30,19 @@ public class Main {
 
         //Adciona a raiz a lista de nos abertos
         astar.abertos.add(astar.processado);
-        int count=0;
         //Enquanto ter elementos na lista
         while(astar.abertos.size() != 0){
             
             
             //remove o elemento a ser o proximo processado
-            //astar.abertos.remove(astar.processado);
-            System.out.println("Lista Abertos: "+ astar.abertos.size());
-            System.out.println("Lista Fechados: "+ astar.fechados.size());
              RemoveDaLista(astar.abertos, astar.processado);
-            //System.out.println("Processando");
-            //astar.processado.printEstado();
-            //System.out.println("Adjacentes");
             //adciona ao de elementos fechados, pois esta sendo atendido
             astar.fechados.add(astar.processado);
             //Verifica se o nó possui o estado objetivo
             if(astar.estadoFinal(astar.processado)){
                 astar.processado.printEstado();
                 //Calcula o caminho do estado o objetivo utilizando os pais
-                quebrac.Caminho = astar.CaminhoCompleto(astar.processado);
+                astar.CaminhoCompleto(astar.processado, quebrac.Caminho);
                 break;
             }
             //Calcula todos os nós adjacentes ao nó em processamento
@@ -88,8 +81,13 @@ public class Main {
             }
             
             //Pegando o proximo
-            System.out.println(count++);
             astar.ProximoNoAProcessar();
+        }
+        int tam = quebrac.Caminho.size();
+        System.out.println("\n\nQuantidade de node no  caminho: " + tam);
+        for(int i =tam-1;i >= 0; i--){
+            quebrac.Caminho.get(i).printEstado();
+            System.out.println();
         }
     }
     

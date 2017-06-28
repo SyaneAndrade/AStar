@@ -6,7 +6,6 @@
 package astar;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -105,14 +104,15 @@ public class AStar {
         return heuristica + custoG;
     }
     
-    public List<Node> CaminhoCompleto(Node finalObjetivo){
-        List<Node> caminhoCompleto = new ArrayList<>();
+    public List<Node> CaminhoCompleto(Node finalObjetivo, List<Node> caminhoCompleto){
+        //List<Node> caminhoCompleto = new ArrayList<>();
         caminhoCompleto.add(finalObjetivo);
-        Node pai = finalObjetivo.pai;
+        Node pai = (Node)finalObjetivo.Clone();
         while(pai.pai != null){
             caminhoCompleto.add(pai);
-            pai = pai.pai;
+            pai = (Node)pai.pai.Clone();
         }
+        caminhoCompleto.add(raiz);
         return caminhoCompleto;
     }
     

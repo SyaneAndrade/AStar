@@ -105,8 +105,6 @@ public class AStar {
     }
     
     public List<Node> CaminhoCompleto(Node finalObjetivo, List<Node> caminhoCompleto){
-        //List<Node> caminhoCompleto = new ArrayList<>();
-        caminhoCompleto.add(finalObjetivo);
         Node pai = (Node)finalObjetivo.Clone();
         while(pai.pai != null){
             caminhoCompleto.add(pai);

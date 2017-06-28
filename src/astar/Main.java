@@ -26,7 +26,7 @@ public class Main {
         
         astar.estadoObjetivo = quebrac.estadoObjetivo.clone();
 
-        boolean h1 = false;
+        boolean h1 = true;
 
         //Adciona a raiz a lista de nos abertos
         astar.abertos.add(astar.processado);

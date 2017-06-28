@@ -99,6 +99,25 @@ public class quebraCabecadosOitos  {
             }
         }
     }
+
+    public int calcula_dist(int x1,int y1,int x2,int y2){
+        return (Math.abs(x1-x2) + Math.abs(y1-y2) );
+    }
+    
+    public int[] getXY(int elem){
+        int[] coordenadas = new int[2];
+        for(int x=0;x<3;x++){
+            for(int y=0;y<3;y++){
+                if(this.estadoObjetivo[x][y] == elem){
+                    coordenadas[0] = x;
+                    coordenadas[1] = y;
+                    return coordenadas;
+                }
+            }
+        }
+        coordenadas[0]=999;
+        return coordenadas;
+    } 
     
     /**
      *
@@ -106,9 +125,22 @@ public class quebraCabecadosOitos  {
      * função para retornar as heuristicas para o node
      */
     public void CalcHeuristicas(Node node){
-
-        node.h1 = HeuristicaSomadosPassos(node);
-        node.h2 = HeuristicaTotaldePecaForadoLugar(node);
+        int h1 = 0, h2 = 0,count = 0;
+        int[] distancias = new int[9];
+        int[] coordenadas = new int[2];
+        
+        for(int x=0;x<3;x++ ){
+            for(int y=0;y<3;y++){
+                if(node.estado[x][y] != count){                    
+                    h1 = h1 + 1;
+                    coordenadas = this.getXY(node.estado[x][y]);
+                    h2 = h2 + this.calcula_dist(x, y, coordenadas[0], coordenadas[1]);
+                }
+                count = count + 1;
+            }
+        }
+        node.h1 = h1;                      
+        node.h2 = h2;
     }
     
     /**

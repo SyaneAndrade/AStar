@@ -125,7 +125,7 @@ public class AStar {
         for(Node node: adjacentes){
             node.calcHeuristicas(node, quebrac);
             node.g = calcG(this.processado.g);
-            
+            System.out.print("\n\tAdjacente: h1 = "+node.h1+", h2 = "+node.h2+", g = "+node.g);
         }
     }
     

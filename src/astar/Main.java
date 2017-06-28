@@ -26,12 +26,14 @@ public class Main {
         
         astar.estadoObjetivo = quebrac.estadoObjetivo.clone();
 
-        boolean h1 = true;
+        boolean h1 = false;
 
         //Adciona a raiz a lista de nos abertos
         astar.abertos.add(astar.processado);
+        int count=0;
         //Enquanto ter elementos na lista
         while(astar.abertos.size() != 0){
+            
             
             //remove o elemento a ser o proximo processado
             //astar.abertos.remove(astar.processado);
@@ -86,6 +88,7 @@ public class Main {
             }
             
             //Pegando o proximo
+            System.out.println(count++);
             astar.ProximoNoAProcessar();
         }
     }

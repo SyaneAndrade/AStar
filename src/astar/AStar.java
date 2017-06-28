@@ -37,8 +37,9 @@ public class AStar {
     
     public void ProximoNoAProcessar(){
         this.processado=(Node) this.abertos.get(0).Clone();
+        //int tam = this.abertos.size();
         for(Node aberto: this.abertos){
-            if(this.processado.f > aberto.f){
+            if(this.processado.f >= aberto.f){
                 this.processado = (Node)aberto.Clone();
             }
         }

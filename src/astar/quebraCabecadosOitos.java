@@ -18,7 +18,13 @@ public class quebraCabecadosOitos  {
     int[][] estadoObjetivo = {{0,1,2},{3,4,5},{6,7,8}};
     List<Node> Caminho = new ArrayList<>();
     
-    
+    public void copyArray(int[][] recCopy, int[][] sendCopy){
+        for(int lin=0; lin < 3; lin++){
+            for(int col=0; col < 3; col++){
+                recCopy[lin][col] = sendCopy[lin][col];
+            }
+        }
+    }
     /**
      *
      * @param adjacentes
@@ -39,9 +45,6 @@ public class quebraCabecadosOitos  {
             System.out.println(lin +" "+ col);
             if(col < 3 && node.estado[lin][col] == 0)
                 break;
-            /*if(node.estado[lin][col] == 0)
-                break;*/
-            System.out.println("Ainda to no for");
         }
         //Cria os proximos estados
         int pecaMove = 0;
@@ -50,7 +53,8 @@ public class quebraCabecadosOitos  {
         //verifico para cada movimento o proximo estado do jogo obtido e 
        //é adcionado na lista de adjacentes
         while(count <= 4){
-            int[][] possivelEstado = node.estado.clone();
+            int[][] possivelEstado = new int[3][3];
+            copyArray(possivelEstado, node.estado);
             //Verifica se posição é valida
             try{
                 if(count == 1){
@@ -79,7 +83,11 @@ public class quebraCabecadosOitos  {
                 }
                  Node adjacente = new Node();
                  adjacente.estado = possivelEstado.clone();
-                 adjacente.pai = (Node) node.Clone();
+                 adjacente.pai = (Node)node.Clone();
+                 adjacente.printEstado();
+                 System.out.println("Pai");
+                 adjacente.pai.printEstado();
+                 System.out.println();
                  adjacentes.add(adjacente);
                  
                  

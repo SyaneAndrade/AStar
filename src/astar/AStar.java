@@ -72,7 +72,7 @@ public class AStar {
                     aberto.f = node.f;
                     aberto.h1 = node.h1;
                     aberto.h2 = node.h2;
-                    aberto.pai = node.pai;
+                    aberto.pai = (Node)node.pai.Clone();
                     return true;
                 }
             }

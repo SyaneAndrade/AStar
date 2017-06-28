@@ -44,4 +44,12 @@ public class Node implements Cloneable {
         quebrac.CalcHeuristicas(node);
     }
     
+    public void printEstado(){
+        for(int lin= 0; lin < 3; lin++){
+            for(int col = 0; col < 3; col++){
+                System.out.print(this.estado[lin][col]+ " ");
+            }
+            System.out.println();
+        }
+    }
 }

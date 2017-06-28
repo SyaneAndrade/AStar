@@ -14,8 +14,9 @@ import java.util.List;
  */
 public class quebraCabecadosOitos  {
     
-    int[][] estadoInicial = {{7,2,4},{5,0,6},{8,3,1}};
-    int[][] estadoObjetivo = {{0,1,2},{3,4,5},{6,7,8}};
+    int[][] estadoInicial = {{1,2,3},{8,6,4},{0,7,5}};
+    int[][] estadoObjetivo = {{1,2,3},{8,0,4},{7,6,5}};
+    //int[][] estadoObjetivo = {{7,2,4},{0,3,6},{8,5,1}};
     List<Node> Caminho = new ArrayList<>();
     
     public void copyArray(int[][] recCopy, int[][] sendCopy){
@@ -82,13 +83,11 @@ public class quebraCabecadosOitos  {
                  Node adjacente = new Node();
                  adjacente.estado = possivelEstado.clone();
                  adjacente.pai = (Node)node.Clone();
-                 adjacente.printEstado();
+                 //adjacente.printEstado();
                  /*System.out.println("Pai");
                  adjacente.pai.printEstado();*/
                  System.out.println();
-                 adjacentes.add(adjacente);
-                 
-                 
+                 adjacentes.add(adjacente);   
             }
             catch(Exception e){
                 //System.out.println(e.getMessage());

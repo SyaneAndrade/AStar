@@ -28,7 +28,7 @@ public class AStar {
      */
     public boolean jaExpandido(Node node){
         for(Node fechado: this.fechados){
-            if(fechado.estado.equals(node.estado)) {
+            if(verifyMatriz(fechado.estado, node.estado)) {
                 return true;
             } 
         }
@@ -68,7 +68,7 @@ public class AStar {
      */
     public boolean inAbertos(Node node_adj){
         for(Node aberto: this.abertos){
-            if(node_adj.estado.equals(aberto.estado)) {
+            if(verifyMatriz(node_adj.estado,aberto.estado)) {
                 if(aberto.g > node_adj.g){
                     aberto.g = node_adj.g;
                     aberto.f = node_adj.f;
@@ -125,7 +125,7 @@ public class AStar {
         for(Node node: adjacentes){
             node.calcHeuristicas(node, quebrac);
             node.g = calcG(this.processado.g);
-            System.out.print("\n\tAdjacente: h1 = "+node.h1+", h2 = "+node.h2+", g = "+node.g);
+            //System.out.print("\n\tAdjacente: h1 = "+node.h1+", h2 = "+node.h2+", g = "+node.g);
         }
     }
     
@@ -136,10 +136,8 @@ public class AStar {
      * @return retorna verdadeiro se nó é estado objetivo, caso contrario
      * retorna falso
      */
-    public boolean estadoFinal(Node node){
-        System.out.println(node.estado[1][1]);
-        
-        return Arrays.equals(node.estado, this.estadoObjetivo);
+    public boolean estadoFinal(Node node){ 
+        return verifyMatriz(node.estado, this.estadoObjetivo);
           
     } 
     

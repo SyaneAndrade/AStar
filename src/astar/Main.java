@@ -23,18 +23,24 @@ public class Main {
         astar.raiz.estado = quebrac.estadoInicial.clone();
 
         astar.processado = (Node)astar.raiz.Clone();
+        
+        astar.estadoObjetivo = quebrac.estadoObjetivo.clone();
 
-        boolean h1 = false;
+        boolean h1 = true;
 
         //Adciona a raiz a lista de nos abertos
         astar.abertos.add(astar.processado);
         //Enquanto ter elementos na lista
         while(astar.abertos.size() != 0){
+            
             //remove o elemento a ser o proximo processado
             //astar.abertos.remove(astar.processado);
+            System.out.println("Lista Abertos: "+ astar.abertos.size());
+            System.out.println("Lista Fechados: "+ astar.fechados.size());
              RemoveDaLista(astar.abertos, astar.processado);
-            astar.processado.printEstado();
-            System.out.println();
+            //System.out.println("Processando");
+            //astar.processado.printEstado();
+            //System.out.println("Adjacentes");
             //adciona ao de elementos fechados, pois esta sendo atendido
             astar.fechados.add(astar.processado);
             //Verifica se o nó possui o estado objetivo
@@ -87,12 +93,26 @@ public class Main {
     public static void RemoveDaLista(List<Node> abertos, Node node){
         int index = 0;
         for(Node aberto: abertos){
-            if(aberto.estado.equals(node.estado)){
+            if(verifyMatriz(aberto.estado,node.estado)){
                 index = abertos.indexOf(aberto);
                 break;
             }
         }
         abertos.remove(index);
+    }
+    
+    public static boolean verifyMatriz(int[][]adj, int[][] aberta){
+        for(int lin=0; lin <3; lin++){
+            for(int col=0; col <3; col++){
+                if(adj[lin][col] == aberta[lin][col]){
+                    
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
 }

@@ -25,16 +25,38 @@ public class Main {
         /*if(raiz.estado != null)
             System.out.println(raiz.estado[1][2]);*/
 
-        astar.processado.estado = astar.raiz.estado.clone();
-
         boolean h1 = true;
-
+        
+        astar.raiz.calcHeuristicas(astar.raiz, quebrac);
+        if(h1)
+            astar.raiz.f = astar.calcF(0,astar.raiz.h1);
+        else
+            astar.raiz.f = astar.calcF(0,astar.raiz.h2);
+        
+        astar.processado.estado = astar.raiz.estado.clone();
+        astar.processado.f = astar.raiz.f;
+        astar.processado.g = astar.raiz.g;
+        astar.processado.h1 = astar.raiz.h1;
+        astar.processado.h2 = astar.raiz.h2;
+        
         //Adciona a raiz a lista de nos abertos
-        astar.abertos.add(astar.raiz);
+        astar.abertos.add(astar.processado);
         //Enquanto ter elementos na lista
         while(0 != astar.abertos.size()){
             //remove o elemento a ser o proximo processado
-            astar.abertos.remove(astar.processado);
+            for(int ab = 0 ; ab<astar.abertos.size();ab++){
+                int coincidencia = 0;
+                for(int x = 0; x<3 ; x++){
+                    for(int y = 0; y<3 ;y++){
+                        if(astar.abertos.get(ab).estado[x][y] == astar.processado.estado[x][y])
+                            coincidencia = coincidencia + 1;
+                    }
+                }
+                if(coincidencia == 9){
+                    astar.abertos.remove(ab);
+                    break;
+                }
+            }
             //adciona ao de elementos fechados, pois esta sendo atendido
             astar.fechados.add(astar.processado);
             //Verifica se o nó possui o estado objetivo
